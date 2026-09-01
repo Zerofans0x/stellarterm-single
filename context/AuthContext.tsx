@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const completeOnboarding = async (onboardingData: any) => {
-    const { data } = await api.post("/auth/onboarding", onboardingData);
+    const { data } = await api.post("/psyche/onboarding", onboardingData);
     if (data.isOnboarded) {
       router.push("/dashboard");
     } else if (data.action === "REDIRECT_PAYMENT") {
