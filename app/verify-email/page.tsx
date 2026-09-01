@@ -92,7 +92,7 @@ function VerifyEmailForm() {
     setErrorMessage("");
     setSuccessMessage("");
     try {
-      await api.post("/resend-verification", { email: emailParam });
+      await api.post("/auth/resend-verification", { email: emailParam });
       setSuccessMessage("A new verification code has been sent to your inbox.");
     } catch (error: any) {
       setErrorMessage(error.response?.data?.message || "Failed to resend verification code.");
