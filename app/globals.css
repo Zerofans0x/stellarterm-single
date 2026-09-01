@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mazzard: var(--font-mazzard), sans-serif;
+  --font-thicccboi: var(--font-thicccboi), sans-serif;
+  --font-thickboi: var(--font-thicccboi), sans-serif;
+  --font-sans: var(--font-thicccboi), sans-serif;
+  --color-primary: #059669;
+  --color-brand-blue: #059669;
+  --color-brand-emerald: #059669;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --primary: #059669;
+  --brand-blue: #059669;
+}
+
+@utility text-brand-blue {
+  color: #059669;
+}
+
+@utility bg-brand-blue {
+  background-color: #059669;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-thicccboi), sans-serif;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+}
