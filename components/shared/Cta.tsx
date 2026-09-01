@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 export default function Cta() {
   return (
     <section className="w-full py-16 sm:py-24 lg:py-32 bg-white">
+      {/* test */}
       <div className="max-w-[1460px] sm:mx-auto px-6 sm:px-10 lg:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
