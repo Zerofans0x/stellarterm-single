@@ -91,7 +91,7 @@ export default function OnboardingPage() {
 
         await completeOnboarding(payload);
 
-        const { data } = await api.post("/payments/crypto/subscribe", {
+        const { data } = await api.post("/payment/crypto/subscribe", {
           slug: selectedPlan
         });
 
@@ -549,18 +549,7 @@ export default function OnboardingPage() {
 
   return (
     <div className="relative min-h-screen w-full bg-white text-slate-900 selection:bg-emerald-100 selection:text-emerald-900 h-screen overflow-hidden">
-      {/* <div className="absolute top-6 sm:top-8 left-6 sm:left-12 lg:left-16 z-40">
-        <Link href="/" className="flex items-center">
-          <Image
-            src="/images/logo.png"
-            alt="stellarterm"
-            width={160}
-            height={38}
-            className="h-7 sm:h-8 w-auto object-contain"
-            priority
-          />
-        </Link>
-      </div> */}
+
 
       <main
         className={`hidden lg:grid w-full h-full max-w-[1400px] mx-auto grid-cols-12 gap-12 items-center p-8 transition-all duration-300 ${
