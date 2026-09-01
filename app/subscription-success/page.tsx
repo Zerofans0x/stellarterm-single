@@ -26,7 +26,7 @@ export default function SubscriptionSuccessPage() {
       try {
         // Note: If your backend verify route expects the BTCPay invoiceId rather than orderId, 
         // ensure you pass the correct identifier stored from the checkout initialization.
-        await api.post("/payments/crypto/verify", { invoiceId: orderId });
+        await api.post("/payment/crypto/verify", { invoiceId: orderId });
         setStatus("success");
         
         // Automatically redirect to dashboard after a brief moment
