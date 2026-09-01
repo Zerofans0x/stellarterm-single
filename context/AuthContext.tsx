@@ -77,10 +77,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const { data } = await api.post("/psyche/onboarding", onboardingData);
     if (data.isOnboarded) {
       router.push("/dashboard");
-    } else if (data.action === "REDIRECT_PAYMENT") {
-      // Handle your payment gateway route here (e.g., Paystack/Stripe init)
-      router.push(`/payment?plan=${data.planSlug}`);
     }
+    return data;
   };
 
   const logout = async () => {
