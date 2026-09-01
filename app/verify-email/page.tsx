@@ -68,7 +68,7 @@ function VerifyEmailForm() {
 
     setIsLoading(true);
     try {
-      const { data } = await api.post("/verify-email", {
+      const { data } = await api.post("/auth/verify-email", {
         email: emailParam,
         code: fullCode,
       });
