@@ -24,14 +24,14 @@ export default function Hero() {
         </div>
 
         <div className="block lg:hidden absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-          <Image
+          {/* <Image
             src="/images/hero-bg-mobile.png"
             alt="Hero mobile background"
             fill
             sizes="100vw"
             priority
             className="object-cover object-top"
-          />
+          /> */}
         </div>
 
         <Navbar />
