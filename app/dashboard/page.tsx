@@ -1,533 +1,52 @@
-
-// "use client";
-
-// import { useState } from "react";
-// import Link from "next/link";
-// import Image from "next/image";
-// import { Icon } from "@iconify/react";
-
-// export default function DashboardPage() {
-//   const [hasStartedCourses, setHasStartedCourses] = useState(true);
-//   const streakDays = 7;
-
-//   // Active / dynamic institutional stats
-//   const stats = hasStartedCourses
-//     ? [
-//         {
-//           title: "Active Mandates",
-//           value: "3",
-//           subtitle: "of 12 in your allocation",
-//           hasArrow: true,
-//         },
-//         {
-//           title: "Modules Completed",
-//           value: "14",
-//           subtitle: "4 this week",
-//           hasArrow: true,
-//         },
-//         {
-//           title: "Portfolio Accuracy",
-//           value: "78%",
-//           subtitle: "6% up from last week",
-//           hasArrow: true,
-//         },
-//         {
-//           title: "Risk Efficiency",
-//           value: "92%",
-//           subtitle: "Optimal drawdown profile",
-//           hasArrow: true,
-//         },
-//       ]
-//     : [
-//         {
-//           title: "Active Mandates",
-//           value: "0",
-//           subtitle: "of 0 in your allocation",
-//           hasArrow: false,
-//         },
-//         {
-//           title: "Modules Completed",
-//           value: "0",
-//           subtitle: "0 this week",
-//           hasArrow: false,
-//         },
-//         {
-//           title: "Portfolio Accuracy",
-//           value: "0%",
-//           subtitle: "0% up from last week",
-//           hasArrow: false,
-//         },
-//         {
-//           title: "Risk Efficiency",
-//           value: "0%",
-//           subtitle: "0% up from last week",
-//           hasArrow: false,
-//         },
-//       ];
-
-//   return (
-//     <div className="space-y-5 sm:space-y-8 animate-in fade-in duration-300">
-//       {/* Top Greeting & Streak Row */}
-//       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-//         <div>
-//           <p className="text-[12px] sm:text-[13.5px] text-slate-500 font-normal">
-//             Good Morning
-//           </p>
-//           <h2 className="font-mazzard text-[24px] sm:text-[32px] lg:text-[36px] text-[#0A1A32] tracking-tight flex items-center gap-2 mt-0.5">
-//             <span>Welcome back, John</span>
-//             <Image
-//               src="/images/dashboard/dashboard-hand-wave.png"
-//               alt="Hand wave"
-//               width={32}
-//               height={32}
-//               className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 object-contain"
-//             />
-//           </h2>
-//         </div>
-
-//         {/* 7-day Streak Pill */}
-//         <div className="self-start sm:self-auto flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[11.5px] sm:text-[12.5px] text-slate-700 font-medium border border-emerald-100">
-//           <Image
-//             src={streakDays > 0 ? "/images/dashboard/streak-on.png" : "/images/dashboard/streak-off.png"}
-//             alt="Streak status"
-//             width={16}
-//             height={16}
-//             className="w-4 h-4 object-contain flex-shrink-0"
-//           />
-//           <span>{streakDays}-day telemetry streak</span>
-//         </div>
-//       </div>
-
-//       {/* 4 Metric Cards — 2x2 on Mobile, 4-Cols on Desktop */}
-//       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
-//         {stats.map((stat, idx) => (
-//           <div
-//             key={idx}
-//             className="bg-white rounded-[20px] sm:rounded-[24px] p-4 sm:p-6 border border-emerald-100 transition-all flex flex-col justify-between min-h-[125px] sm:min-h-[145px] relative group shadow-sm"
-//           >
-//             <div>
-//               <h3 className="text-[11.5px] sm:text-[13px] text-slate-500 font-normal truncate">
-//                 {stat.title}
-//               </h3>
-//               <div className="font-thicccboi text-[30px] sm:text-[38px] lg:text-[42px] text-[#059669] leading-none mt-1.5 sm:mt-2">
-//                 {stat.value}
-//               </div>
-//             </div>
-
-//             <div className="flex items-end justify-between gap-1 mt-2">
-//               <p className="text-[10px] sm:text-[11.5px] text-slate-400 truncate">
-//                 {stat.subtitle}
-//               </p>
-
-//               {stat.hasArrow && (
-//                 <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-emerald-50 text-[#059669] flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105">
-//                   <Icon icon="lucide:arrow-up-right" className="w-3.5 h-3.5" />
-//                 </div>
-//               )}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* Active Course Continue Banner (When in progress) */}
-//       {hasStartedCourses ? (
-//         <div className="bg-white rounded-[20px] sm:rounded-[26px] p-4 sm:p-5 lg:p-6 shadow-xs border border-emerald-100 flex items-center justify-between gap-3 sm:gap-6">
-//           <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
-//             {/* Thumbnail */}
-//             <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-[12px] sm:rounded-[14px] bg-emerald-100 flex-shrink-0 relative overflow-hidden">
-//               <Image
-//                 src="/images/course-2.png"
-//                 alt="Institutional Liquidity Foundations"
-//                 fill
-//                 className="object-cover opacity-90"
-//               />
-//             </div>
-
-//             {/* Course Info */}
-//             <div className="min-w-0 flex-1">
-//               <p className="text-[11px] sm:text-[12px] text-slate-400 font-normal">
-//                 Quantitative · Tier 1 Mandate
-//               </p>
-//               <h3 className="font-mazzard text-[14px] sm:text-[17px] text-[#0A1A32] tracking-tight truncate mt-0.5">
-//                 Institutional Liquidity Foundations
-//               </h3>
-
-//               {/* Progress Track */}
-//               <div className="w-28 sm:w-48 lg:w-56 h-1 sm:h-1.5 rounded-full bg-slate-200 overflow-hidden mt-1.5">
-//                 <div className="w-[34%] h-full bg-[#059669] rounded-full" />
-//               </div>
-//               <p className="text-[9.5px] sm:text-[10.5px] text-slate-400 mt-1 truncate">
-//                 Module 4 of 12 · 34% complete
-//               </p>
-//             </div>
-//           </div>
-
-//           {/* Continue CTA Button */}
-//           <Link
-//             href="/dashboard/courses/1/lesson/1"
-//             className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-4.5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#059669] hover:bg-[#047857] active:scale-[0.99] text-white text-[12.5px] sm:text-[13.5px] font-medium transition-all shadow-sm shadow-emerald-500/20 whitespace-nowrap flex-shrink-0 cursor-pointer"
-//           >
-//             <span>Continue</span>
-//             <svg
-//               className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white"
-//               viewBox="0 0 24 24"
-//               fill="none"
-//               stroke="currentColor"
-//               strokeWidth="2.5"
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//             >
-//               <line x1="4" y1="12" x2="20" y2="12" />
-//               <polyline points="14 6 20 12 14 18" />
-//             </svg>
-//           </Link>
-//         </div>
-//       ) : (
-//         /* "Not sure where to start?" Assessment Callout Card (When new user) */
-//         <div className="bg-white rounded-[20px] sm:rounded-[26px] p-4.5 sm:p-7 shadow-xs border border-emerald-100 space-y-3 sm:space-y-4">
-//           <div>
-//             <h3 className="font-mazzard text-[16px] sm:text-[22px] text-[#0A1A32] tracking-tight">
-//               Initialize your asset allocation mandate?
-//             </h3>
-//             <p className="text-[11px] sm:text-[13.5px] text-slate-500 leading-relaxed mt-1 max-w-[650px]">
-//               Complete the institutional profiling questionnaire to configure custom risk parameters and quantitative telemetry.
-//             </p>
-//           </div>
-
-//           <Link
-//             href="/onboarding"
-//             className="inline-flex items-center justify-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#059669] hover:bg-[#047857] active:scale-[0.99] text-white text-[12px] sm:text-[13.5px] font-normal transition-all shadow-sm shadow-emerald-500/20 whitespace-nowrap cursor-pointer"
-//           >
-//             <span>Configure Mandate</span>
-//             <svg
-//               className="w-3.5 h-3.5 text-white"
-//               viewBox="0 0 24 24"
-//               fill="none"
-//               stroke="currentColor"
-//               strokeWidth="2.5"
-//               strokeLinecap="round"
-//               strokeLinejoin="round"
-//             >
-//               <line x1="4" y1="12" x2="20" y2="12" />
-//               <polyline points="14 6 20 12 14 18" />
-//             </svg>
-//           </Link>
-//         </div>
-//       )}
-
-//       {/* 2-Column Section: Up next in your path & Activity */}
-//       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
-//         {/* Left Column: Up next in your path */}
-//         <div className="lg:col-span-6 flex flex-col">
-//           <div className="flex items-center justify-between px-1 mb-3">
-//             <h3 className="font-mazzard text-[15px] sm:text-[16px] text-[#0A1A32]">
-//               Up next in your allocation
-//             </h3>
-//             <Link
-//               href="/dashboard/courses"
-//               className="text-[12px] text-slate-400 hover:text-[#059669] transition-colors"
-//             >
-//               See all
-//             </Link>
-//           </div>
-
-//           <div className="flex-1 flex flex-col gap-2.5 sm:gap-3">
-//             {/* Card 1: Active */}
-//             <Link
-//               href="/dashboard/courses/1/lesson/1"
-//               className="flex-1 bg-white rounded-[18px] sm:rounded-[20px] p-3.5 sm:p-4 shadow-xs border border-emerald-100 flex items-center justify-between gap-3 hover:shadow-sm transition-shadow cursor-pointer group"
-//             >
-//               <div className="flex items-center gap-3 min-w-0">
-//                 <div className="w-10 h-10 rounded-[12px] bg-emerald-50 flex-shrink-0 relative overflow-hidden">
-//                   <Image
-//                     src="/images/course-1.png"
-//                     alt="Module thumbnail"
-//                     fill
-//                     className="object-cover"
-//                   />
-//                 </div>
-//                 <div className="min-w-0">
-//                   <h4 className="text-[13px] sm:text-[14px] text-[#059669] truncate font-medium group-hover:underline">
-//                     Module 5 — Level 3 Order Book Telemetry
-//                   </h4>
-//                   <p className="text-[11px] text-slate-400 mt-0.5 truncate">
-//                     Module 4 of 12 · 34% complete
-//                   </p>
-//                 </div>
-//               </div>
-//               <button
-//                 type="button"
-//                 className="w-7 h-7 rounded-full flex items-center justify-center text-[#059669] hover:bg-emerald-50 transition-colors flex-shrink-0"
-//                 aria-label="Play module"
-//               >
-//                 <Icon icon="solar:play-bold" className="w-4 h-4 text-[#059669]" />
-//               </button>
-//             </Link>
-
-//             {/* Card 2: Locked */}
-//             <div className="flex-1 bg-white rounded-[18px] sm:rounded-[20px] p-3.5 sm:p-4 shadow-xs border border-emerald-100 flex items-center justify-between gap-3 hover:shadow-sm transition-shadow">
-//               <div className="flex items-center gap-3 min-w-0">
-//                 <div className="w-10 h-10 rounded-[12px] bg-slate-200 flex-shrink-0 relative overflow-hidden">
-//                   <Image
-//                     src="/images/course-3.png"
-//                     alt="Course 3"
-//                     fill
-//                     className="object-cover opacity-80"
-//                   />
-//                 </div>
-//                 <div className="min-w-0">
-//                   <h4 className="text-[13px] sm:text-[14px] text-[#0A1A32] truncate font-medium">
-//                     Risk protocol: Gamma exposure limits
-//                   </h4>
-//                   <p className="text-[11px] text-slate-400 mt-0.5 truncate">
-//                     Risk Masterclass · 12 min
-//                   </p>
-//                 </div>
-//               </div>
-//               <Icon icon="lucide:lock" className="w-4 h-4 text-[#059669] flex-shrink-0 mr-1.5" />
-//             </div>
-
-//             {/* Card 3: Locked */}
-//             <div className="flex-1 bg-white rounded-[18px] sm:rounded-[20px] p-3.5 sm:p-4 shadow-xs border border-emerald-100 flex items-center justify-between gap-3 hover:shadow-sm transition-shadow">
-//               <div className="flex items-center gap-3 min-w-0">
-//                 <div className="w-10 h-10 rounded-[12px] bg-slate-200 flex-shrink-0 relative overflow-hidden">
-//                   <Image
-//                     src="/images/course-4.png"
-//                     alt="Course 4"
-//                     fill
-//                     className="object-cover opacity-80"
-//                   />
-//                 </div>
-//                 <div className="min-w-0">
-//                   <h4 className="text-[13px] sm:text-[14px] text-[#0A1A32] truncate font-medium">
-//                     Algorithmic backtesting configurations
-//                   </h4>
-//                   <p className="text-[11px] text-slate-400 mt-0.5 truncate">
-//                     Quantitative Masterclass · 12 min
-//                   </p>
-//                 </div>
-//               </div>
-//               <Icon icon="lucide:lock" className="w-4 h-4 text-[#059669] flex-shrink-0 mr-1.5" />
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Right Column: Activity — last 7 days */}
-//         <div className="lg:col-span-6 flex flex-col">
-//           <div className="px-1 mb-3">
-//             <h3 className="font-mazzard text-[15px] sm:text-[16px] text-[#0A1A32]">
-//               Telemetry Activity — last 7 days
-//             </h3>
-//           </div>
-
-//           <div className="flex-1 bg-white rounded-[20px] sm:rounded-[22px] p-4 sm:p-6 shadow-xs border border-emerald-100 flex flex-col justify-between">
-//             <div className="flex items-center justify-between mb-4">
-//               <h4 className="font-mazzard text-[15px] sm:text-[17px] text-[#0A1A32]">
-//                 Portfolio Deployment Velocity
-//               </h4>
-//               <button
-//                 type="button"
-//                 className="text-[11px] sm:text-[11.5px] text-slate-500 border border-slate-200/80 rounded-[8px] px-2.5 py-1 flex items-center gap-1 hover:bg-slate-50 cursor-pointer"
-//               >
-//                 <span>Daily</span>
-//                 <Icon icon="lucide:chevron-down" className="w-3.5 h-3.5 text-slate-400" />
-//               </button>
-//             </div>
-
-//             {/* Interactive SVG Chart matching exact design */}
-//             <div className="w-full pt-2">
-//               <div className="relative h-44 sm:h-48 w-full flex">
-//                 {/* Y-Axis Labels */}
-//                 <div className="flex flex-col justify-between font-thicccboi text-[11px] sm:text-[12px] text-slate-500 pr-3.5 select-none text-right min-w-[28px]">
-//                   <span className="leading-none -mt-1">8Hr</span>
-//                   <span className="leading-none">6hr</span>
-//                   <span className="leading-none">4Hr</span>
-//                   <span className="leading-none">2Hr</span>
-//                   <span className="leading-none -mb-1">0</span>
-//                 </div>
-
-//                 {/* Chart Area with Grid and Paths */}
-//                 <div className="relative flex-1 h-full">
-//                   {/* Grid: Horizontal lines */}
-//                   <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
-//                     <div className="w-full border-b border-[#F1F5F9]" />
-//                     <div className="w-full border-b border-[#F1F5F9]" />
-//                     <div className="w-full border-b border-[#F1F5F9]" />
-//                     <div className="w-full border-b border-[#F1F5F9]" />
-//                     <div className="w-full border-b border-[#F1F5F9]" />
-//                   </div>
-
-//                   {/* Grid: Vertical lines aligned with days */}
-//                   <div className="absolute inset-0 flex justify-between pointer-events-none">
-//                     <div className="h-full border-r border-[#F1F5F9]" />
-//                     <div className="h-full border-r border-[#F1F5F9]" />
-//                     <div className="h-full border-r border-[#F1F5F9]" />
-//                     <div className="h-full border-r border-[#F1F5F9]" />
-//                     <div className="h-full border-r border-[#F1F5F9]" />
-//                     <div className="h-full border-r border-[#F1F5F9]" />
-//                     <div className="h-full border-r border-[#F1F5F9]" />
-//                   </div>
-
-//                   {/* SVG Chart Line & Fill */}
-//                   <svg
-//                     viewBox="0 0 600 200"
-//                     preserveAspectRatio="none"
-//                     className="w-full h-full overflow-visible relative z-10"
-//                   >
-//                     <defs>
-//                       <linearGradient id="exactProgressGradient" x1="0" y1="0" x2="0" y2="1">
-//                         <stop offset="0%" stopColor="#059669" stopOpacity="0.88" />
-//                         <stop offset="35%" stopColor="#10b981" stopOpacity="0.55" />
-//                         <stop offset="70%" stopColor="#a7f3d0" stopOpacity="0.22" />
-//                         <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0.0" />
-//                       </linearGradient>
-//                     </defs>
-
-//                     {/* Gradient Area Fill */}
-//                     <path
-//                       d="M 0,168 L 100,150 L 200,75 L 290,40 L 370,162.5 L 455,130 L 530,42.5 L 600,7.5 L 600,200 L 0,200 Z"
-//                       fill="url(#exactProgressGradient)"
-//                     />
-
-//                     {/* Bottom dashed baseline start */}
-//                     <line
-//                       x1="0"
-//                       y1="200"
-//                       x2="100"
-//                       y2="200"
-//                       stroke="#CBD5E1"
-//                       strokeWidth="1.5"
-//                       strokeDasharray="2.5 2.5"
-//                     />
-
-//                     {/* Left vertical dashed drop at Monday start */}
-//                     <line
-//                       x1="0"
-//                       y1="200"
-//                       x2="0"
-//                       y2="168"
-//                       stroke="#0F172A"
-//                       strokeWidth="1.8"
-//                       strokeDasharray="3 2.5"
-//                     />
-
-//                     {/* Main Dotted Chart Line */}
-//                     <path
-//                       d="M 0,168 L 100,150 L 200,75 L 290,40 L 370,162.5 L 455,130 L 530,42.5 L 600,7.5"
-//                       fill="none"
-//                       stroke="#0F172A"
-//                       strokeWidth="1.8"
-//                       strokeDasharray="3 2.5"
-//                     />
-//                   </svg>
-//                 </div>
-//               </div>
-
-//               {/* X-Axis Labels */}
-//               <div className="flex justify-between pl-7 sm:pl-10 pr-0 mt-3 font-thicccboi text-[9px] sm:text-[11.5px] text-slate-500 select-none">
-//                 <span className="text-center">
-//                   <span className="sm:hidden">Mon</span>
-//                   <span className="hidden sm:inline">Monday</span>
-//                 </span>
-//                 <span className="text-center">
-//                   <span className="sm:hidden">Tue</span>
-//                   <span className="hidden sm:inline">Tuesday</span>
-//                 </span>
-//                 <span className="text-center">
-//                   <span className="sm:hidden">Wed</span>
-//                   <span className="hidden sm:inline">Wednesday</span>
-//                 </span>
-//                 <span className="text-center">
-//                   <span className="sm:hidden">Thu</span>
-//                   <span className="hidden sm:inline">Thursday</span>
-//                 </span>
-//                 <span className="text-center">
-//                   <span className="sm:hidden">Fri</span>
-//                   <span className="hidden sm:inline">Friday</span>
-//                 </span>
-//                 <span className="text-center">
-//                   <span className="sm:hidden">Sat</span>
-//                   <span className="hidden sm:inline">Saturday</span>
-//                 </span>
-//                 <span className="text-center">
-//                   <span className="sm:hidden">Sun</span>
-//                   <span className="hidden sm:inline">Sunday</span>
-//                 </span>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
+import { api } from "@/lib/api"; // Ensure your axios instance is imported
 
 export default function DashboardPage() {
-  const [hasActivePortfolio, setHasActivePortfolio] = useState(true);
-  const streakDays = 7;
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTerminalData = async () => {
+      try {
+        const response = await api.get('/psyche/terminal');
+        setData(response.data.data);
+      } catch (error) {
+        console.error("Failed to fetch terminal data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTerminalData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex-1 flex items-center justify-center min-h-[60vh]">
+        <div className="w-8 h-8 border-4 border-[#059669] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  const { hasActivePortfolio, user, metrics, strategy, positions } = data;
 
   // Active / dynamic investment portfolio stats
   const stats = hasActivePortfolio
     ? [
-        {
-          title: "Total Portfolio Value",
-          value: "$482,910",
-          subtitle: "+4.2% this week",
-          hasArrow: true,
-        },
-        {
-          title: "Active Positions",
-          value: "14",
-          subtitle: "3 liquidating soon",
-          hasArrow: true,
-        },
-        {
-          title: "YTD Return",
-          value: "18.4%",
-          subtitle: "Outperforming benchmark",
-          hasArrow: true,
-        },
-        {
-          title: "Sharpe Ratio",
-          value: "2.41",
-          subtitle: "Optimal risk efficiency",
-          hasArrow: true,
-        },
+        { title: "Total Portfolio Value", value: `$${metrics.totalValue.toLocaleString()}`, subtitle: "+4.2% this week", hasArrow: true },
+        { title: "Active Positions", value: metrics.activePositionsCount, subtitle: "3 liquidating soon", hasArrow: true },
+        { title: "YTD Return", value: `${metrics.ytdReturn}%`, subtitle: "Outperforming benchmark", hasArrow: true },
+        { title: "Sharpe Ratio", value: metrics.sharpeRatio, subtitle: "Optimal risk efficiency", hasArrow: true },
       ]
     : [
-        {
-          title: "Total Portfolio Value",
-          value: "$0.00",
-          subtitle: "No capital deployed",
-          hasArrow: false,
-        },
-        {
-          title: "Active Positions",
-          value: "0",
-          subtitle: "Zero exposure",
-          hasArrow: false,
-        },
-        {
-          title: "YTD Return",
-          value: "0.0%",
-          subtitle: "No historical data",
-          hasArrow: false,
-        },
-        {
-          title: "Sharpe Ratio",
-          value: "0.00",
-          subtitle: "Uncalibrated",
-          hasArrow: false,
-        },
+        { title: "Total Portfolio Value", value: "$0.00", subtitle: "No capital deployed", hasArrow: false },
+        { title: "Active Positions", value: "0", subtitle: "Zero exposure", hasArrow: false },
+        { title: "YTD Return", value: "0.0%", subtitle: "No historical data", hasArrow: false },
+        { title: "Sharpe Ratio", value: "0.00", subtitle: "Uncalibrated", hasArrow: false },
       ];
 
   return (
@@ -539,7 +58,7 @@ export default function DashboardPage() {
             Institutional Terminal Active
           </p>
           <h2 className="font-mazzard text-[24px] sm:text-[32px] lg:text-[36px] text-[#0A1A32] tracking-tight flex items-center gap-2 mt-0.5">
-            <span>Welcome back, John</span>
+            <span>Welcome back, {user.firstName}</span>
             <Image
               src="/images/dashboard/dashboard-hand-wave.png"
               alt="Hand wave"
