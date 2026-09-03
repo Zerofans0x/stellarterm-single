@@ -11,12 +11,16 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+
     const fetchTerminalData = async () => {
       try {
+        // Keeps your preferred route
         const response = await api.get('/psyche/terminal');
         setData(response.data.data);
       } catch (error) {
         console.error("Failed to fetch terminal data", error);
+        // Optional: If 401, redirect to login
+        // if (error.response?.status === 401) router.push('/login');
       } finally {
         setLoading(false);
       }
@@ -24,7 +28,8 @@ export default function DashboardPage() {
     fetchTerminalData();
   }, []);
 
-  if (loading) {
+  // 🚨 CRITICAL FIX: Add `|| !data` to prevent the TypeError crash
+  if (loading || !data) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[60vh]">
         <div className="w-8 h-8 border-4 border-[#059669] border-t-transparent rounded-full animate-spin" />
