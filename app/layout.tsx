@@ -19,7 +19,7 @@ const mazzard = localFont({
 export const metadata: Metadata = {
   title: "stellarterm | Grow your capital with structure.",
   description:
-    "One platform, everything you need to learn, track, and improve as a forex trader.",
+    "A secure and transparent asset management ecosystem for investors who are serious about growing their capital.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
