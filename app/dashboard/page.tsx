@@ -4,31 +4,32 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
-import { api } from "@/lib/api"; // Ensure your axios instance is imported
+import { api } from "@/lib/api"; 
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  useEffect(() => {
-
+useEffect(() => {
     const fetchTerminalData = async () => {
       try {
-        // Keeps your preferred route
         const response = await api.get('/psyche/terminal');
         setData(response.data.data);
-      } catch (error) {
+      } catch (error: any) {
         console.error("Failed to fetch terminal data", error);
-        // Optional: If 401, redirect to login
-        // if (error.response?.status === 401) router.push('/login');
+        if (error.response?.status === 401) {
+          router.push('/login');
+        }
       } finally {
         setLoading(false);
       }
     };
     fetchTerminalData();
-  }, []);
+  }, [router]);
 
-  // 🚨 CRITICAL FIX: Add `|| !data` to prevent the TypeError crash
+
   if (loading || !data) {
     return (
       <div className="flex-1 flex items-center justify-center min-h-[60vh]">
